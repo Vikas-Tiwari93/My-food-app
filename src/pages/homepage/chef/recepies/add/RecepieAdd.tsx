@@ -10,13 +10,11 @@ export default function RecepieAdd() {
 
   return (
     <StyledRecepieAdd>
-      <h2 style={{ marginBottom: "20px" }}> Add Recepie</h2>
+      <h3 style={{ marginBottom: "20px" }}> Add Recepie</h3>
       <div className="signup-form">
      <AddRecepieForm/>
-        <div className="seperator"></div>
-        <div className="sepearotor-text">
-          Any issues ? Please reach out to us.
-        </div>
+      
+       
       </div>
     </StyledRecepieAdd>
   );

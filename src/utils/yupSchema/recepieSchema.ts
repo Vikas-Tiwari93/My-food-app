@@ -4,6 +4,7 @@ import * as yup from "yup";
 export const addRecepieSchema = yup.object().shape({
   name: yup.string().required("Name is required"),
   file: yup.mixed(),
+  veg:yup.boolean().required("type is required"),
   email: yup
     .string()
     .required("Email is required")

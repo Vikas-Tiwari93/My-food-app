@@ -12,20 +12,15 @@
  
   #product-details > .name {
     text-align: center;
-    font-size: 20px;
+    font-size: 14px;
   }
   
-  #product-details > .price {
-    text-align: center;
-    font-size: 24px;
-  }
-  
+
   .dark #product-details > div {
     color: #f0f0f0;
   }
   
   .options {
-    
     padding: 20px;
     position: absolute;
     bottom: 0;
@@ -57,8 +52,7 @@
   
 }
 .dx-menu-item-wrapper{
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 14px;
 }
 .dx-submenu li {
   font-size: 14px;

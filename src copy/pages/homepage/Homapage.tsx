@@ -1,3 +1,4 @@
+import React from 'react';
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Navbar from "../../components/pageComponents/homepageComponents/navbar/Navbar";
 import Sidebar from "../../components/pageComponents/homepageComponents/sidebar/Sidebar";
