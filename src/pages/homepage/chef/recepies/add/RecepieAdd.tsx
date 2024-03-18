@@ -1,5 +1,5 @@
 import React from 'react'
-import AddRecepieForm from '../../../../../components/pageComponents/chefComponent/addRecepieComponents/AddRecepieForm';
+import AddRecepieForm from '../../../../../components/pageComponents/chefComponent/recepieComponents/AddRecepieForm';
 import styled from '@emotion/styled';
 const StyledRecepieAdd= styled.div`
 width:100%;

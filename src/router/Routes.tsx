@@ -13,6 +13,7 @@ import Recepies from "../pages/homepage/chef/recepies/Recepies";
 import RecepieList from "../pages/homepage/chef/recepies/list/RecepieList";
 import RecepieDetails from "../pages/homepage/chef/recepies/details/RecepieDetails";
 import RecepieAdd from "../pages/homepage/chef/recepies/add/RecepieAdd";
+import RecepieEdit from "../pages/homepage/chef/recepies/edit/RecepieEdit";
 
 let routes = createBrowserRouter([
   {
@@ -101,7 +102,7 @@ let routes = createBrowserRouter([
               {
                 path: "edit",
 
-                element: <RecepieAdd />,
+                element: <RecepieEdit />,
                 children: [],
               },
             ],

@@ -3,7 +3,6 @@ import Cards from "../../../../components/pageComponents/homepageComponents/card
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import SearchComponent from "../../../../components/common/searchComponent/SearchComponent";
-import AddRecepieModal from "../../../../components/pageComponents/chefComponent/recepiesComponent/AddRecepieModal";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const RecepiePageChef = styled.div`
