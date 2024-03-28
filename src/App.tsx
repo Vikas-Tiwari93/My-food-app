@@ -1,11 +1,12 @@
 import "devextreme/dist/css/dx.light.css";
 import React from "react";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { Provider } from "react-redux";
+import { CircularProgress, createTheme, ThemeProvider } from "@mui/material";
+import { Provider, TypedUseSelectorHook } from "react-redux";
 import "./App.css";
 import Approuter from "./router/Approuter";
-import store from "./redux/store/store";
-import { getUsenameAndPasswordBase64 } from "./services/APIservices/API.tokenService";
+import store, { AppDispatch, RootState } from "./redux/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toast";
 
 const orangeTheme = createTheme({
   typography: {
@@ -19,14 +20,16 @@ const orangeTheme = createTheme({
   },
 });
 
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 function App() {
-  console.log(getUsenameAndPasswordBase64());
   return (
     <div className="App">
       <Provider store={store}>
         <ThemeProvider theme={orangeTheme}>
           <Approuter />
         </ThemeProvider>
+        <ToastContainer position="top-right" delay={1500} />
       </Provider>
     </div>
   );

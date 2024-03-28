@@ -4,6 +4,7 @@ import Cards from "../../../components/pageComponents/homepageComponents/cards/C
 import styled from "@emotion/styled";
 import { Outlet } from "react-router-dom";
 
+
 export default function Chef() {
   const [searchvalue, setSearch] = useState("56");
   const cardobj = {
@@ -27,6 +28,7 @@ export default function Chef() {
     }
   `;
   return (
+   
     <StyledProfile>
       {/* <SearchComponent
         onChange={(e) => {

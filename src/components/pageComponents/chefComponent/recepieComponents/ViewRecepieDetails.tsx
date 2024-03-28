@@ -12,9 +12,11 @@ import { useNavigate } from "react-router-dom";
 export type RecepieDetailsResponse = {
   name: string;
   detailedType: string;
+  image?:string;
   type: boolean;
   shortDescription: string;
   ingredients: {
+    sysId?:string;
     name: string;
     amount: string;
   }[];
@@ -64,6 +66,14 @@ border-radius:10px;
     display: flex;
     gap: 5px;
   }
+  .steps-details{
+list-style:none;
+display:flex;
+gap:10px;
+  }
+  .instructions{
+    padding:10px;
+  }
 `;
 
 export default function ViewRecepieDetails({
@@ -99,11 +109,11 @@ export default function ViewRecepieDetails({
           </Typography>
         </div>
         <div className="image-recepie-view">
-<img src="/images/no-image.jpeg" alt="" />
+<img src={recepie.image||"/images/no-image.jpeg"} alt="" />
         </div>
       </div>
       <div className="ingredient-root-view">
-        <Typography variant="body2" color="textSecondary" gutterBottom>
+        <Typography variant="body1" color="textSecondary" gutterBottom>
           Ingredients:
         </Typography>
         <ul className="each-ingedient-root">
@@ -118,14 +128,17 @@ export default function ViewRecepieDetails({
         </ul>
       </div>
 
-      <Typography variant="body2" color="textSecondary" gutterBottom>
+      <Typography variant="body1" color="textSecondary" className="instructions">
         Instructions:
       </Typography>
-      <ol>
-        <li>Step 1</li>
-        <li>Step 2</li>
-        <li>Step 3</li>
-      </ol>
+      <ul>
+      {recepie.steps.map((elm, index) => (
+            <li key={index} className="steps-details">
+              <Typography variant="body2">Step: {elm.step}</Typography>
+                <Typography variant="body2">{elm.details}</Typography>
+            </li>
+          ))}
+      </ul>
     </StyledRecepieDetailsCard>
   );
 }

@@ -3,7 +3,7 @@ import { Button, TextField, Input } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signInSchema } from "../../../utils/yupSchema/authSchema";
+import { signInSchema, signUpSchema } from "../../../utils/yupSchema/authSchema";
 
 const SignupPage = styled.div`
   display: flex;
@@ -107,7 +107,7 @@ export default function Signup() {
     reset,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(signInSchema),
+    resolver: yupResolver(signUpSchema),
   });
 
   type FormData = {
@@ -115,6 +115,7 @@ export default function Signup() {
     email: string;
     password: string;
     file?: File;
+    role:string;
   };
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);

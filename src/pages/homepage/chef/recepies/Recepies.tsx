@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import SearchComponent from "../../../../components/common/searchComponent/SearchComponent";
 import { Outlet, useNavigate } from "react-router-dom";
 
+
 const RecepiePageChef = styled.div`
   width: 100%;
   display: flex;

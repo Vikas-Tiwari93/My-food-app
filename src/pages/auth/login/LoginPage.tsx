@@ -1,11 +1,23 @@
 import styled from "@emotion/styled";
-import { Button, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signInSchema } from "../../../utils/yupSchema/authSchema";
 
 import React, { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { signInQuery } from "../../../redux/slices/authSlice";
+
+import { useAppDispatch, useAppSelector } from "../../../App";
 
 const SignInPage = styled.div`
   display: flex;
@@ -19,6 +31,12 @@ const SignInPage = styled.div`
   .signup-form {
     width: 400px;
     padding: 10px;
+  }
+  .roles-selector {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
   .signup-form form {
     display: flex;
@@ -53,6 +71,9 @@ const SignInPage = styled.div`
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const email = useAppSelector((state) => state.signinSlice.email);
+console.log(email)
   const {
     register,
     handleSubmit,
@@ -62,13 +83,21 @@ export default function LoginPage() {
     resolver: yupResolver(signInSchema),
   });
   type FormData = {
+    role: string;
     name: string;
-    email: string;
     password: string;
-    file?: File;
+
   };
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    dispatch(
+      signInQuery({
+        role: data.role,
+        username: data.name,
+        password: data.password,
+      })
+    );
+    navigate("/");
   };
   return (
     <SignInPage>
@@ -93,6 +122,22 @@ export default function LoginPage() {
             error={!!errors.password}
             helperText={errors.password?.message as ReactNode}
           />
+          <div className="roles-selector">
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Select role</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="select"
+                defaultValue=""
+                {...register("role")}
+                label="Select role"
+                error={!!errors.role}
+              >
+                <MenuItem value="user">General user</MenuItem>
+                <MenuItem value="chef">Chef</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
           <div id="buttons-root">
             <Button type="submit" variant="contained" color="primary">
               Sign in

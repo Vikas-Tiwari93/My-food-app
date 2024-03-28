@@ -1,31 +1,40 @@
 import axios, { AxiosRequestHeaders } from "axios";
 import {
+  attachCookiesToRequest,
   getAuthTokenkey,
   getRefreshTokenkey,
   getUsenameAndPasswordBase64,
   removeTokenKeys,
   setAuthTokenkey,
 } from "./API.tokenService";
-import { toast } from "react-toastify";
 type APIoptions = {
   isJson?: boolean;
   isAuth?: boolean;
   contentType?: string;
-  cookie?: string;
+  cookie?: boolean;
   formData?: boolean;
   basicAuth?: boolean;
 };
-const baseUrl = "";
+const baseUrl = "https://dev191213.service-now.com";
 
 export const APIClient = axios.create({
   baseURL: baseUrl || "",
   transformRequest: [],
-  transformResponse: [],
+  transformResponse: [
+    function (data) {
+
+      try {
+        return JSON.parse(data);
+      } catch (error) {
+        return data;
+      }
+    }
+  ],
 });
 
 const expireSession = (err: unknown) => {
   if (err) {
-    toast.error("Session expired login in needed");
+  
     removeTokenKeys();
     window.location.replace(`${baseUrl}/auth/signin`);
   }
@@ -77,7 +86,7 @@ export const getRequest = async (url: string, options?: APIoptions) => {
     headers["Content-Type"] = options.contentType;
   }
   if (options?.cookie) {
-    headers["Cookie"] = options.cookie;
+    headers["Cookie"] = attachCookiesToRequest()
   }
 
   return APIClient.get(url, { headers });
@@ -104,7 +113,8 @@ export const postRequest = async <T>(
     headers["Content-Type"] = "multipart/form-data";
   }
   if (options?.cookie) {
-    headers["Cookie"] = options.cookie;
+    headers["Cookie"] = attachCookiesToRequest()
+  
   }
 
   return APIClient.post(url, data, { headers });
@@ -130,10 +140,8 @@ export const putRequest = async <T>(
     headers["Content-Type"] = "multipart/form-data";
   }
   if (options?.cookie) {
-    headers["Cookie"] = options.cookie;
-  }
-  if (options?.cookie) {
-    headers["Cookie"] = options.cookie;
+    headers["Cookie"] = attachCookiesToRequest()
+  
   }
 
   return APIClient.put(url, data, { headers });

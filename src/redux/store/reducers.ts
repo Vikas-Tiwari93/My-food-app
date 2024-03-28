@@ -1,11 +1,15 @@
-import { combineReducers } from "@reduxjs/toolkit";
+import { Dispatch, combineReducers } from "@reduxjs/toolkit";
 
-
+import {signinSliceReducer} from "../slices/authSlice"
+import { ingredientSliceReducer } from "../slices/IngredientsSlice";
+import { recepieSliceReducer } from "../slices/recepieSlice";
 
 const rootReducer = combineReducers({
-  // managerReducer: managerReducer,
-//   employeeSlice: employeeSlice,
-//   signinSlice: signinSlice,
+ 
+  signinSlice: signinSliceReducer,
+  IngredientSlice:ingredientSliceReducer,
+  recepieSlice:recepieSliceReducer
 });
+
 
 export default rootReducer;
